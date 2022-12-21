@@ -1,27 +1,31 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
+  <main class="columns is-gapless is-multiline">
+    <div class="column is-one-quarter">
+      <BarraLateral />
+    </div>
+    <div class="column is-three-quarter">
+      <FormTimer />
+      <div class="lista">
+        <TarefaForm />
+      </div>
+    </div>
+  </main>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import HelloWorld from './components/HelloWorld.vue';
+import BarraLateral from './components/BarraLateral.vue';
+import FormTimer from './components/FormTimer.vue';
+import TarefaForm from './components/TarefaForm.vue';
 
 export default defineComponent({
   name: 'App',
-  components: {
-    HelloWorld
-  }
+  components: { BarraLateral, FormTimer, TarefaForm },
 });
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+.lista {
+  padding: 1.5rem;
 }
 </style>
