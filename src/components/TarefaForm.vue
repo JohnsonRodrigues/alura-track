@@ -1,26 +1,33 @@
 <template>
-  <div class="box has-text-weight-bold">
+  <BoxTarefa>
     <div class="columns">
-      <div class="column is-7">Descrição</div>
+      <div class="column is-7">{{ tarefa.descricao || 'Tarefa sem descrição'  }}</div>
       <div class="column">
-        <CronometroTime :tempoEmSegundos="15" />
+        <CronometroTime :tempoEmSegundos="tarefa.duracaoEmSegundos"/>
       </div>
     </div>
-  </div>
+  </BoxTarefa>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import {defineComponent, PropType} from 'vue';
 import CronometroTime from './CronometroTime.vue';
+import ITarefa from "@/interfaces/ITarefa";
+import BoxTarefa from "@/components/BoxTarefa.vue";
+
 
 export default defineComponent({
   name: 'TarefaForm',
-  components: { CronometroTime },
+  components: {BoxTarefa, CronometroTime},
+  props: {
+    tarefa: {
+      type: Object as PropType<ITarefa>,
+      required: true
+    }
+  }
 });
 </script>
 
 <style scoped>
-.box {
-  background:#FAF0CA ;
-}
+
 </style>
