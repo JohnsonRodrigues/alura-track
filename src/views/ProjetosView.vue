@@ -19,8 +19,8 @@
       </thead>
       <tbody>
       <tr v-for="projeto in projetos" :key="projeto.id">
-        <td>{{projeto.id}}</td>
-        <td>{{ projeto.nome}}</td>
+        <td>{{ projeto.id }}</td>
+        <td>{{ projeto.nome }}</td>
       </tr>
       </tbody>
     </table>
@@ -28,8 +28,9 @@
 </template>
 
 <script lang="ts">
-import {defineComponent} from 'vue';
+import {computed, defineComponent} from 'vue';
 import IProjeto from "@/interfaces/IProjeto";
+import {useStore} from "@/store";
 
 
 export default defineComponent({
@@ -37,18 +38,26 @@ export default defineComponent({
   data() {
     return {
       nomeDoProjeto: "",
-      projetos: [] as IProjeto[]
+      // projetos: [] as IProjeto[]
     }
   },
   methods: {
     salvar() {
-      const projeto: IProjeto = {
-        nome: this.nomeDoProjeto,
-        id: new Date().toISOString()
-      };
+      // const projeto: IProjeto = {
+      //   nome: this.nomeDoProjeto,
+      //   id: new Date().toISOString()
+      // };
 
-      this.projetos.push(projeto);
+      this.store.commit("ADICIONA_PROJETO", this.nomeDoProjeto)
+      // this.projetos.push(projeto);
       this.nomeDoProjeto = '';
+    }
+  },
+  setup() {
+    const store = useStore();
+    return {
+      store,
+      projetos: computed(() => store.state.projetos)
     }
   }
 });
